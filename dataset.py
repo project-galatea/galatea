@@ -26,5 +26,7 @@ class Dataset():
 		for csv in csvs:
 			alllines.extend(self.load_csv(csv))
 		print len(alllines)
+		print alllines[0]
+		print alllines[-1]
 		
 Dataset()
