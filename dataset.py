@@ -1,6 +1,6 @@
 import os
 import numpy as np
-
+from progressbar import ProgressBar
 from config import *
 
 class Dataset():
@@ -64,10 +64,11 @@ class Dataset():
 		Y = np.zeros((0,max_chars_per_msg+1,29), dtype="bool")
 
 		for csv in csvs:
+			self._logger.info(csv)
 			lines = self.load_csv(csv)
 			samples = self.converttosamples(lines)
-
-			for i in range(0,len(samples)-num_msgs_to_concat-1,1):
+			pbar = ProgressBar()
+			for i in pbar(range(0,len(samples)-num_msgs_to_concat-1,1)):
 				concatted = np.zeros((0, 29),dtype="bool")
 				for j in range(i,i+num_msgs_to_concat,1):
 					concatted = np.concatenate([concatted,samples[j]])
