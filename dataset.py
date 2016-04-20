@@ -43,9 +43,22 @@ class Dataset():
 		return temp
 	def load_csvs_from_folder(self,path):
 		csvs=self.get_csvs(path)
+		X=np.array([],dtype="bool")
+		num_msgs_to_concat=2
+		max_chars_per_msg=10
+		X.shape=(0,(max_chars_per_msg+1)*num_msgs_to_concat,29)
+		Y=np.array([],dtype="bool")
+		Y.shape=(0,max_chars_per_msg+1,29)
 		for csv in csvs:
 			lines=self.load_csv(csv)
 			samples=self.converttosamples(lines)
+			for i in range(0,len(samples)-num_msgs_to_concat-1,1):
+				concatted=np.array([],dtype="bool")
+				concatted.shape=(0,29)
+				for j in range(i,i+num_msgs_to_concat,1):
+					concatted=np.concatenate([concatted,samples[j]])
+				np.append(X,concatted)
+				np.append(Y,samples[i+num_msgs_to_concat])
 			print lines[0]
 			print samples[0]
 	def __init__(self):
