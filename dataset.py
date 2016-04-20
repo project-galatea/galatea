@@ -59,8 +59,8 @@ class Dataset():
 					concatted=np.concatenate([concatted,samples[j]])
 				np.append(X,concatted)
 				np.append(Y,samples[i+num_msgs_to_concat])
-			print lines[0]
-			print samples[0]
+		print X[0]
+		print Y[0]
 	def __init__(self):
 		print "INIT"
 
