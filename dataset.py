@@ -51,6 +51,7 @@ class Dataset():
 		Y.shape=(0,max_chars_per_msg+1,29)
 		for csv in csvs:
 			lines=self.load_csv(csv)
+			print lines[0]
 			samples=self.converttosamples(lines)
 			for i in range(0,len(samples)-num_msgs_to_concat-1,1):
 				concatted=np.array([],dtype="bool")
@@ -59,6 +60,7 @@ class Dataset():
 					concatted=np.concatenate([concatted,samples[j]])
 				X=np.append(X,concatted)
 				Y=np.append(Y,samples[i+num_msgs_to_concat])
+				print i," ",len(samples)
 		print X[0]
 		print Y[0]
 	def __init__(self):
