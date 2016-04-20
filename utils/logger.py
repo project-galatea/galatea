@@ -34,7 +34,7 @@ class Logger():
 
 	def log(self, lvl, msg):
 		with open(self.logfile, "a") as logfile:
-			callfunc = inspect.getouterframes(inspect.currentframe(), 2)[1][3] # Get name of function that called this
+			callfunc = inspect.getouterframes(inspect.currentframe(), 2)[2][3] # Get name of function that called this
 			ts = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H:%M:%S')
 			log = ts + " : " + self.log_levels[lvl] + " " + " --- " + str(inspect.currentframe().f_back.f_locals['self']) + " in " + callfunc + " : " + msg + "\n"
 			if self.verbose:
