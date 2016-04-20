@@ -16,6 +16,7 @@ class LSTMNet():
 
 	def load_dataset(self):
 		d = Dataset()
+		d.load_csvs_from_folder("/Users/leijurv/Downloads/dank/")
 		# TODO
 
 	def build_model(self):
