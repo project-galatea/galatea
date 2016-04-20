@@ -40,7 +40,9 @@ class Dataset():
 		csvs=self.get_csvs(path)
 		for csv in csvs:
 			lines=self.load_csv(csv)
-			self.converttosamples(lines)
+			samples=self.converttosamples(lines)
+			print lines[0]
+			print samples[0]
 	def __init__(self):
 		print "INIT"
 
