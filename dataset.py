@@ -36,6 +36,7 @@ class Dataset():
 		for i in range(max_chars_per_msg):
 			if(i<len(line['Msg'])):
 				temp[i][self.indexfromchar(line['Msg'][i])]=1
+		return temp
 	def load_csvs_from_folder(self,path):
 		csvs=self.get_csvs(path)
 		for csv in csvs:
