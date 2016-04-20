@@ -66,6 +66,7 @@ class Dataset():
 		for csv in csvs:
 			lines = self.load_csv(csv)
 			samples = self.converttosamples(lines)
+
 			for i in range(0,len(samples)-num_msgs_to_concat-1,1):
 				concatted = np.zeros((0, 29),dtype="bool")
 				for j in range(i,i+num_msgs_to_concat,1):
@@ -75,6 +76,7 @@ class Dataset():
 
 		self._logger.debug(str(X[0]))
 		self._logger.debug(str(Y[0]))
+
 
 if __name__=="__main__":
 	d = Dataset()
