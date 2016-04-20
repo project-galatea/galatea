@@ -16,6 +16,12 @@ HIDDEN_LAYER_DIM = 64
 
 # ---------------------------------------
 
+# Dataset config
+
+CSV_DIR = "data"
+
+# ---------------------------------------
+
 # Training config
 
 TRAIN_BATCH_SIZE = 64
