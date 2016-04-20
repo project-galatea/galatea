@@ -20,13 +20,11 @@ class Dataset():
 		otherstuff=",".join(splitted[:-2])#there might have been commas in the first part, so put those back
 		return {'Msg': otherstuff[1:-1], 'User':username, 'Date':date}
 	def __init__(self):
-		print "lol"
 		path="/Users/leijurv/Downloads/dank/"
 		csvs=self.get_csvs(path)
-		print csvs
-
+		alllines=[]
 		for csv in csvs:
-			bleh= self.load_csv(csv)
-			print bleh[0]
+			alllines.extend(self.load_csv(csv))
+		print len(alllines)
 		
 Dataset()
