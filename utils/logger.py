@@ -20,8 +20,6 @@ class Logger():
 		else:
 			self.logfile = os.path.join(DEFAULT_LOG_DIR, datetime.datetime.fromtimestamp(time.time()).strftime('%m-%d_%H:%M') + ".log")
 
-		self.mode = mode
-
 	def info(self, msg):
 		self.log(0, msg)
 
@@ -33,7 +31,7 @@ class Logger():
 
 	def error(self, msg):
 		self.log(3, msg)
-		
+
 	def log(self, lvl, msg):
 		with open(self.logfile, "a") as logfile:
 			callfunc = inspect.getouterframes(inspect.currentframe(), 2)[1][3] # Get name of function that called this
