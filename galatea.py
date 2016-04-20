@@ -1,4 +1,4 @@
-from logger import Logger as L
+from utils.logger import Logger as L
 from nn import LSTMNet
 
 class Galatea():
