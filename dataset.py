@@ -25,17 +25,21 @@ class Dataset():
 		return [self.sample(line) for line in lines]
 	def indexfromchar(self,char):
 		if(char==' '):
-			return 0
+			return 1
 		o=ord(char)
 		if(o>=ord('a') and o<=ord('z')):
-			return o-ord('a')+2
-		return 1
+			return o-ord('a')+3
+		return 2
 	def sample(self,line):
 		max_chars_per_msg=10
-		temp=np.zeros((max_chars_per_msg,28),dtype="bool")
+		temp=np.zeros((max_chars_per_msg+1,29),dtype="bool")
 		for i in range(max_chars_per_msg):
 			if(i<len(line['Msg'])):
 				temp[i][self.indexfromchar(line['Msg'][i])]=1
+		if(len(line['Msg'])>max_chars_per_msg):
+			temp[max_chars_per_msg][0]=1
+		else:
+			temp[len(line['Msg'])-1][0]=1
 		return temp
 	def load_csvs_from_folder(self,path):
 		csvs=self.get_csvs(path)
