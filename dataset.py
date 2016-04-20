@@ -13,7 +13,7 @@ class Dataset():
 		content_list = []
 		for content in os.listdir(path): # "." means current directory
 			if content.endswith(".csv"):
-				content_list.append(path+content)
+				content_list.append(os.path.join(path, content))
 		return content_list
 
 	def load_csv(self,path):
