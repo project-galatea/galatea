@@ -1,6 +1,8 @@
-
 import os
 import numpy as np
+
+from config import *
+
 class Dataset():
 	def __init__(self, logger):
 		self._logger = logger
@@ -54,8 +56,10 @@ class Dataset():
 
 	def load_csvs_from_folder(self,path):
 		csvs = self.get_csvs(path)
-		num_msgs_to_concat = 2 #TODO move these to config
-		max_chars_per_msg = 10
+
+		num_msgs_to_concat = MSG_HISTORY_LEN
+		max_chars_per_msg = INPUT_SEQ_LEN
+		
 		X = np.zeros((0,(max_chars_per_msg+1)*num_msgs_to_concat,29), dtype="bool")
 		Y = np.zeros((0,max_chars_per_msg+1,29), dtype="bool")
 
