@@ -63,7 +63,7 @@ class LSTMNet():
 			yield self.X[i:i+n], self.y[i:i+n]
 
 	def log_preds(self, test_sentences=["hello", "how are you", "what is the meaning of life"]):
-		d = Dataset()
+		d = Dataset(self._logger)
 
 		for s in test_sentences:
 			seed = d.sample({"Msg": s})
