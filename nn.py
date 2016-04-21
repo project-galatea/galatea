@@ -5,6 +5,7 @@ from keras.layers.recurrent import LSTM
 import seq2seq
 from seq2seq.models import Seq2seq
 from dataset import Dataset
+import numpy as np
 
 from config import *
 
