@@ -42,7 +42,7 @@ class LSTMNet():
 			self._logger.info("Iteration " + str(i))
 
 			for X_train, y_train in self.get_batches():
-				self.model.fit(X_train, Y_train, batch_size=TRAIN_BATCH_SIZE, nb_epoch=1, show_accuracy=True, verbose=1)
+				self.model.fit(X_train, y_train, batch_size=TRAIN_BATCH_SIZE, nb_epoch=1, show_accuracy=True, verbose=1)
 
 				if i % SAVE_WEIGHT_FREQ == 0:
 					self.save_weights()
