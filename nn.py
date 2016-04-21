@@ -57,7 +57,7 @@ class LSTMNet():
 	def get_batches(self, n=None):
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
-			n = 500
+			n = 960
 		
 		for i in xrange(0, len(self.X), n):
 			yield self.X[i:i+n], self.y[i:i+n]
