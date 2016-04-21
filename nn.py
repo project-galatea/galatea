@@ -58,7 +58,7 @@ class LSTMNet():
 	def get_batches(self, n=None):
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
-			n = 960
+			n = 6400
 		
 		for i in xrange(0, len(self.X), n):
 			yield self.X[i:i+n], self.y[i:i+n]
@@ -77,6 +77,7 @@ class LSTMNet():
 
 	def predict_sentence(self, input_seq):
 		preds = self.model.predict(input_seq, verbose=0)[0]
+		self._logger.info(str(preds))
 		sentence = ""
 		for pred in preds:
 			sentence += self.decode_text(self.sample_pred(pred))
