@@ -106,6 +106,8 @@ class LSTMNet():
 			return " "
 		if n == 2:
 			return "2"
+		if n == 0:
+			return "<EOM>"
 		return chr(n + ord('a') - 3)
 
 	def generate(self, input_sentences):
