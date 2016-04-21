@@ -67,8 +67,11 @@ class LSTMNet():
 		d = Dataset(self._logger)
 
 		for s in test_sentences:
-			seed = np.zeros((TRAIN_BATCH_SIZE, (MAX_OUTPUT_TOKEN_LENGTH+1)*MSG_HISTORY_LEN), dtype="bool")
-			seed[0] = d.sample({"Msg": s})
+			seed = np.zeros((TRAIN_BATCH_SIZE, (MAX_OUTPUT_TOKEN_LENGTH+1)*MSG_HISTORY_LEN,29), dtype="bool")
+			blahhh=d.sample({"Msg": s})
+			for i in range(len(blahhh)):
+				for j in range(len(blahhh[0])):
+					seed[0][i][j]=blahhh[i][j]
 
 			self._logger.info(self.predict_sentence(seed))
 
