@@ -63,8 +63,8 @@ class Dataset():
 		num_msgs_to_concat = MSG_HISTORY_LEN
 		max_chars_per_msg = INPUT_SEQ_LEN
 		
-		X = np.zeros((0,(max_chars_per_msg+1)*num_msgs_to_concat,29), dtype="bool")
-		Y = np.zeros((0,max_chars_per_msg+1,29), dtype="bool")
+		X = np.zeros((len(samples)-num_msgs_to_concat-1, (max_chars_per_msg+1)*num_msgs_to_concat, 29), dtype="bool")
+		Y = np.zeros((len(samples)-num_msgs_to_concat-1, max_chars_per_msg+1, 29), dtype="bool")
 
 		for csv in csvs:
 			self._logger.info(csv)
@@ -73,8 +73,8 @@ class Dataset():
 			pbar = ProgressBar()
 			for i in pbar(range(0,len(samples)-num_msgs_to_concat-1,1)):
 				concatted = np.concatenate([samples[j] for j in range(i,i+num_msgs_to_concat,1)])
-				X = np.append(X,concatted)
-				Y = np.append(Y,samples[i+num_msgs_to_concat])
+				X[i] = concatted
+				Y[i] = samples[i - 1]
 
 				np.save(open(SAVE_X, "wb"), X)
 				np.save(open(SAVE_Y, "wb"), Y)
