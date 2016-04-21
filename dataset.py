@@ -74,6 +74,7 @@ class Dataset():
 					concatted = np.concatenate([concatted,samples[j]])
 				X = np.append(X,concatted)
 				Y = np.append(Y,samples[i+num_msgs_to_concat])
+		return X, y
 
 		self._logger.debug(str(X[0]))
 		self._logger.debug(str(Y[0]))

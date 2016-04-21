@@ -27,6 +27,8 @@ CSV_DIR = "data"
 
 TRAIN_BATCH_SIZE = 64
 TRAIN_ITERS = 100
+WEIGHTS_PATH = "model_weights.h5"
+SAVE_WEIGHT_FREQ = 100
 
 # ---------------------------------------
 
