@@ -19,7 +19,7 @@ class Galatea():
 def main():
 	g = Galatea()
 
-	g.generate(["hello", "how are you"])
+	print g.generate(["hello", "how are you"])
 
 if __name__ == '__main__':
 	main()
