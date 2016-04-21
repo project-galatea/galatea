@@ -52,38 +52,38 @@ class LSTMNet():
 		self.model.save_weights(WEIGHTS_PATH, overwrite=True)
 
 	def get_batches(self, n=None):
-        if n is None:
-            n = TRAIN_BATCH_SIZE
+		if n is None:
+			n = TRAIN_BATCH_SIZE
+		
+		for i in xrange(0, len(self.X), n):
+			yield self.X[i:i+n], self.y[i:i+n]
 
-        for i in xrange(0, len(self.X), n):
-            yield self.X[i:i+n], self.y[i:i+n]
+	def log_preds(self, test_sentences=["hello", "how are you", "what is the meaning of life"]):
+		d = Dataset()
 
-    def log_preds(self, test_sentences=["hello", "how are you", "what is the meaning of life"]):
-    	d = Dataset()
+		for s in test_sentences:
+			seed = d.sample({"Msg": s})
+			self._logger.debug("Seed\t" + str(seed))
+			self._logger.info(self.predict_sentence(seed))
 
-    	for s in test_sentences:
-    		seed = d.sample({"Msg": s})
-    		self._logger.debug("Seed\t" + str(seed))
-    		self._logger.info(self.predict_sentence(seed))
+	def predict_sentence(self, input_seq):
+		preds = self.model.predict(input_seq, verbose=0)[0]
+		sentence = ""
+		for pred in preds:
+			sentence += self.decode_text(self.sample_pred(pred))
 
-    def predict_sentence(self, input_seq):
-    	preds = self.model.predict(input_seq, verbose=0)[0]
-    	sentence = ""
-    	for pred in preds:
-    		sentence += self.decode_text(self.sample_pred(pred))
+		return sentence
 
-    	return sentence
+	def sample_pred(self, a, temperature=1.0):
+		a = np.log(a) / temperature
+		a = np.exp(a) / np.sum(np.exp(a))
 
-    def sample_pred(self, a, temperature=1.0):
-    	a = np.log(a) / temperature
-        a = np.exp(a) / np.sum(np.exp(a))
+		return np.argmax(np.random.multinomial(1, a, 1))
 
-        return np.argmax(np.random.multinomial(1, a, 1))
-
-    def decode_text(self, n):
-    	if n == 1:
-    		return " "
-    	if n == 2:
-    		return ""
-    	return chr(n + ord('a') - 3)
+	def decode_text(self, n):
+		if n == 1:
+			return " "
+		if n == 2:
+			return ""
+		return chr(n + ord('a') - 3)
 
