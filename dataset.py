@@ -72,9 +72,7 @@ class Dataset():
 			samples = self.converttosamples(lines)
 			pbar = ProgressBar()
 			for i in pbar(range(0,len(samples)-num_msgs_to_concat-1,1)):
-				concatted = np.zeros((0, 29),dtype="bool")
-				for j in range(i,i+num_msgs_to_concat,1):
-					concatted = np.concatenate([concatted,samples[j]])
+				concatted = np.concatenate([samples[j] for j in range(i,i+num_msgs_to_concat,1)])
 				X = np.append(X,concatted)
 				Y = np.append(Y,samples[i+num_msgs_to_concat])
 
