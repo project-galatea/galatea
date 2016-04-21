@@ -63,8 +63,12 @@ class Dataset():
 		num_msgs_to_concat = MSG_HISTORY_LEN
 		max_chars_per_msg = INPUT_SEQ_LEN
 		
-		X = np.zeros((len(samples)-num_msgs_to_concat-1, (max_chars_per_msg+1)*num_msgs_to_concat, 29), dtype="bool")
-		Y = np.zeros((len(samples)-num_msgs_to_concat-1, max_chars_per_msg+1, 29), dtype="bool")
+		num_samples = 0
+		for csv in csvs:
+			num_samples += len(self.load_csv(csv))-num_msgs_to_concat-1
+
+		X = np.zeros((num_samples, (max_chars_per_msg+1)*num_msgs_to_concat, 29), dtype="bool")
+		Y = np.zeros((num_samples, max_chars_per_msg+1, 29), dtype="bool")
 
 		for csv in csvs:
 			self._logger.info(csv)
