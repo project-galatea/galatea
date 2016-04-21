@@ -39,7 +39,7 @@ class LSTMNet():
 			iters = TRAIN_ITERS
 
 		for i in range(1, iters + 1):
-			_logger.info("Iteration " + str(i))
+			self._logger.info("Iteration " + str(i))
 
 			for X_train, y_train in self.get_batches():
 				self.model.fit(X_train, Y_train, batch_size=TRAIN_BATCH_SIZE, nb_epoch=1, show_accuracy=True, verbose=1)
