@@ -58,7 +58,7 @@ class LSTMNet():
 	def get_batches(self, n=None):
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
-			n = 6400
+			n = 16000
 		
 		for i in xrange(0, len(self.X), n):
 			yield self.X[i:i+n], self.y[i:i+n]
@@ -85,6 +85,7 @@ class LSTMNet():
 		return sentence
 
 	def sample_pred(self, a, temperature=1.0):
+		return np.argmax(a)
 		a = np.log(a) / temperature
 		a = np.exp(a) / np.sum(np.exp(a))
 
