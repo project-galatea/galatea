@@ -66,8 +66,7 @@ class LSTMNet():
 		d = Dataset(self._logger)
 
 		for s in test_sentences:
-			seed = d.sample({"Msg": s})
-			self._logger.debug("Seed\t" + str(seed))
+			seed = np.array([d.sample({"Msg": s})], dtype="bool")
 			self._logger.info(self.predict_sentence(seed))
 
 	def predict_sentence(self, input_seq):
