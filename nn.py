@@ -55,10 +55,19 @@ class LSTMNet():
 	def save_weights(self):
 		self.model.save_weights(WEIGHTS_PATH, overwrite=True)
 
+	def load_weights(self, fpath=None):
+		if not fpath:
+			fpath = WEIGHTS_PATH
+
+		if os.path.isfile(fpath):
+			self.model.load_weights(fpath)
+		else:
+			self._logger.warn("Error loading weights, initializing random weights. ")
+
 	def get_batches(self, n=None):
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
-			n = 16000
+			n = 32000
 		
 		for i in xrange(0, len(self.X), n):
 			yield self.X[i:i+n], self.y[i:i+n]
@@ -97,4 +106,28 @@ class LSTMNet():
 		if n == 2:
 			return "2"
 		return chr(n + ord('a') - 3)
+
+	def generate(self, input_sentences):
+		if len(input_sentences) != MSG_HISTORY_LEN:
+			self._logger.error("Invalid amount of input sentences. Must be equal to " + str(MSG_HISTORY_LEN))
+			return ""
+
+		sentences = []
+
+		for s in input_sentences:
+			sentences = {"Msg" : s[:INPUT_SEQ_LEN - 1]}
+
+		d = Dataset(self._logger)
+
+		seed = np.zeros((TRAIN_BATCH_SIZE, (MAX_OUTPUT_TOKEN_LENGTH+1)*MSG_HISTORY_LEN, 29), dtype="bool")
+
+		v = np.concatenate([d.converttosamples(sentences[j]) for j in range(i,i+num_msgs_to_concat,1)])
+
+		for i in range(len(v)):
+			for j in range(len(v[i])):
+				seed[0][i][j] = v[i][j]
+
+		self._logger.info("Generating with seed " + input_sentence)
+
+		return self.predict_sentence(seed)
 
