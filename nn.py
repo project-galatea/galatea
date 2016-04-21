@@ -19,7 +19,8 @@ class LSTMNet():
 		self._logger.info("Loading dataset...")
 		self.X, self.y = d.load_csvs_from_folder(CSV_DIR)
 		self._logger.info("Done oading dataset")
-		# TODO
+		self._logger.debug(str(self.X.shape))
+		self._logger.debug(str(self.y.shape))
 
 	def build_model(self):
 		self._logger.info("Building model...")
