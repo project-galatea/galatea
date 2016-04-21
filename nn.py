@@ -71,6 +71,8 @@ class LSTMNet():
 			n = 32000
 		
 		for i in xrange(0, len(self.X), n):
+			self.X = self.X[:len(self.X) - 1 - len(self.X) % TRAIN_BATCH_SIZE]
+			self.y = self.y[:len(self.y) - 1 - len(self.y) % TRAIN_BATCH_SIZE]
 			yield self.X[i:i+n], self.y[i:i+n]
 
 	def log_preds(self, test_sentences=["hello", "how are you", "what is the meaning of life"]):
