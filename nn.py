@@ -116,13 +116,13 @@ class LSTMNet():
 		sentences = []
 
 		for s in input_sentences:
-			sentences = {"Msg" : s[:INPUT_SEQ_LEN - 1]}
+			sentences.append({"Msg": s[:INPUT_SEQ_LEN - 1]})
 
 		d = Dataset(self._logger)
 
 		seed = np.zeros((TRAIN_BATCH_SIZE, (MAX_OUTPUT_TOKEN_LENGTH+1)*MSG_HISTORY_LEN, 29), dtype="bool")
 		samples = d.converttosamples(sentences)
-		
+
 		v = np.concatenate([samples[j] for j in range(0, MSG_HISTORY_LEN)])
 
 		for i in range(len(v)):
