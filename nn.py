@@ -122,7 +122,7 @@ class LSTMNet():
 
 		seed = np.zeros((TRAIN_BATCH_SIZE, (MAX_OUTPUT_TOKEN_LENGTH+1)*MSG_HISTORY_LEN, 29), dtype="bool")
 
-		v = np.concatenate([d.converttosamples(sentences[j]) for j in range(i,i+num_msgs_to_concat,1)])
+		v = np.concatenate([d.converttosamples(sentences[j]) for j in range(0 ,num_msgs_to_concat,1)])
 
 		for i in range(len(v)):
 			for j in range(len(v[i])):
