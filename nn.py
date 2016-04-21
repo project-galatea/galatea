@@ -129,7 +129,7 @@ class LSTMNet():
 			for j in range(len(v[i])):
 				seed[0][i][j] = v[i][j]
 
-		self._logger.info("Generating with seed " + input_sentence)
+		self._logger.info("Generating with seed " + str(input_sentences))
 
 		return self.predict_sentence(seed)
 
