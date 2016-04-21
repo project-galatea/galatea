@@ -7,7 +7,7 @@ class Galatea():
 		self.net = LSTMNet(self._logger)
 		self.net.load_dataset()
 		self.net.build_model()
-		self.load_weights()
+		self.net.load_weights()
 
 	def train(self):
 		self.net.train()
@@ -18,7 +18,8 @@ class Galatea():
 
 def main():
 	g = Galatea()
+
 	g.generate(["hello", "how are you"])
-	
+
 if __name__ == '__main__':
 	main()
