@@ -79,6 +79,10 @@ class Dataset():
 				np.save(open(SAVE_X, "wb"), X)
 				np.save(open(SAVE_Y, "wb"), Y)
 
+		self._logger.debug(str(X.shape))
+		self._logger.debug(str(Y.shape))
+
+
 		return X, Y
 
 		self._logger.debug(str(X[0]))
