@@ -43,7 +43,7 @@ class Dataset():
 		return 2
 
 	def sample(self,line):
-		max_chars_per_msg=10
+		max_chars_per_msg=INPUT_SEQ_LEN
 		temp=np.zeros((max_chars_per_msg+1,29),dtype="bool")
 		for i in range(max_chars_per_msg):
 			if(i<len(line['Msg'])):
