@@ -48,16 +48,16 @@ class LSTMNet():
 
 				self.model.fit(X_train, y_train, batch_size=TRAIN_BATCH_SIZE, nb_epoch=1, show_accuracy=True, verbose=1)
 
-				if i % SAVE_WEIGHT_FREQ == 0:
-					self.save_weights()
-					self.log_preds()
+				self.save_weights()
+				self.log_preds()
 
 	def save_weights(self):
 		self.model.save_weights(WEIGHTS_PATH, overwrite=True)
 
 	def get_batches(self, n=None):
 		if n is None:
-			n = TRAIN_BATCH_SIZE
+			# n = TRAIN_BATCH_SIZE
+			n = 500
 		
 		for i in xrange(0, len(self.X), n):
 			yield self.X[i:i+n], self.y[i:i+n]
