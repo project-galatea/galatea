@@ -25,7 +25,7 @@ class LSTMNet():
 	def build_model(self):
 		self._logger.info("Building model...")
 		self.model = Seq2seq(
-			batch_input_shape=(TRAIN_BATCH_SIZE, INPUT_SEQ_LEN, 29),
+			batch_input_shape=(TRAIN_BATCH_SIZE, INPUT_SEQ_LEN*MSG_HISTORY_LEN, 29),
 			hidden_dim=HIDDEN_LAYER_DIM, 
 			output_length=MAX_OUTPUT_TOKEN_LENGTH, 
 			output_dim=29, # not sure if this is right
