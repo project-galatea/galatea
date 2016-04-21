@@ -55,6 +55,9 @@ class Dataset():
 		return temp
 
 	def load_csvs_from_folder(self,path):
+		if os.path.isfile(SAVE_X) and os.path.isfile(SAVE_Y):
+			return self.load_from_npy(SAVE_X, SAVE_Y)
+
 		csvs = self.get_csvs(path)
 
 		num_msgs_to_concat = MSG_HISTORY_LEN
@@ -74,11 +77,20 @@ class Dataset():
 					concatted = np.concatenate([concatted,samples[j]])
 				X = np.append(X,concatted)
 				Y = np.append(Y,samples[i+num_msgs_to_concat])
-		return X, y
+
+				np.save(open(SAVE_X, "wb"), X)
+				np.save(open(SAVE_Y, "wb"), Y)
+
+		return X, Y
 
 		self._logger.debug(str(X[0]))
 		self._logger.debug(str(Y[0]))
 
+	def load_from_npy(self, X_path, y_path):
+		X_file = open(X_path, "rb")
+		y_file = open(y_path, "rb")
+
+		return np.load(X_file), np.load(y_file)
 
 if __name__=="__main__":
 	d = Dataset()

@@ -20,6 +20,8 @@ MSG_HISTORY_LEN = 2
 # Dataset config
 
 CSV_DIR = "data"
+SAVE_X = "dataset_X.npy"
+SAVE_Y = "dataset_y.npy"
 
 # ---------------------------------------
 
