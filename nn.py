@@ -84,6 +84,6 @@ class LSTMNet():
 		if n == 1:
 			return " "
 		if n == 2:
-			return ""
+			return "2"
 		return chr(n + ord('a') - 3)
 
