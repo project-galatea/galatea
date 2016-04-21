@@ -6,6 +6,7 @@ class Galatea():
 		self._logger = L("test.log", 1)
 		self.net = LSTMNet(self._logger)
 		self.net.load_dataset()
+		self.net.build_model()
 		self.net.train()
 
 g = Galatea()
