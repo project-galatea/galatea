@@ -3,7 +3,7 @@ from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.embeddings import Embedding
 from keras.layers.recurrent import LSTM
 import seq2seq
-from seq2seq.models import Seq2seq
+from seq2seq.models import AttentionSeq2seq
 from dataset import Dataset
 import os
 import numpy as np
