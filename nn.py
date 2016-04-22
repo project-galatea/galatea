@@ -3,7 +3,7 @@ from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.embeddings import Embedding
 from keras.layers.recurrent import LSTM
 import seq2seq
-from seq2seq.models import AttentionSeq2seq
+from seq2seq.models import Seq2seq
 from dataset import Dataset
 import os
 import numpy as np
@@ -26,12 +26,12 @@ class LSTMNet():
 
 	def build_model(self):
 		self._logger.info("Building model...")
-		self.model = AttentionSeq2seq(
+		self.model = Seq2seq(
 			batch_input_shape=(TRAIN_BATCH_SIZE, (INPUT_SEQ_LEN+1)*MSG_HISTORY_LEN, 29),
-			hidden_dim=HIDDEN_LAYER_DIM,
-			output_length=MAX_OUTPUT_TOKEN_LENGTH,
+			hidden_dim=HIDDEN_LAYER_DIM, 
+			output_length=MAX_OUTPUT_TOKEN_LENGTH, 
 			output_dim=29,
-			depth=3
+			depth=1
 		)
 		self._logger.info("Compiling...")
 		self.model.compile(loss='mse', optimizer='rmsprop')
@@ -68,7 +68,7 @@ class LSTMNet():
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
 			n = 320000
-
+		
 		for i in xrange(0, len(self.X), n):
 			self.X = self.X[:len(self.X) - len(self.X) % TRAIN_BATCH_SIZE]
 			self.y = self.y[:len(self.y) - len(self.y) % TRAIN_BATCH_SIZE]
@@ -136,3 +136,4 @@ class LSTMNet():
 		self._logger.info("Generating with seed " + str(input_sentences))
 
 		return self.predict_sentence(seed)
+
