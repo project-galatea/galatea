@@ -13,7 +13,7 @@ class Galatea():
 		self.net.train()
 
 	def generate(self, input_sentences):
-		return self.net.generate(input_sentences)		
+		return self.net.generate(input_sentences)
 
 
 def main():

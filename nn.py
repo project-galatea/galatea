@@ -28,8 +28,8 @@ class LSTMNet():
 		self._logger.info("Building model...")
 		self.model = Seq2seq(
 			batch_input_shape=(TRAIN_BATCH_SIZE, (INPUT_SEQ_LEN+1)*MSG_HISTORY_LEN, 29),
-			hidden_dim=HIDDEN_LAYER_DIM, 
-			output_length=MAX_OUTPUT_TOKEN_LENGTH, 
+			hidden_dim=HIDDEN_LAYER_DIM,
+			output_length=MAX_OUTPUT_TOKEN_LENGTH,
 			output_dim=29, # not sure if this is right
 			depth=3,
 			peek=True
@@ -69,7 +69,7 @@ class LSTMNet():
 		if n is None:
 			# n = TRAIN_BATCH_SIZE
 			n = 320000
-		
+
 		for i in xrange(0, len(self.X), n):
 			self.X = self.X[:len(self.X) - len(self.X) % TRAIN_BATCH_SIZE]
 			self.y = self.y[:len(self.y) - len(self.y) % TRAIN_BATCH_SIZE]
@@ -137,4 +137,3 @@ class LSTMNet():
 		self._logger.info("Generating with seed " + str(input_sentences))
 
 		return self.predict_sentence(seed)
-
