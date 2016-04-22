@@ -1,0 +1,5 @@
+Keras==0.3.2
+numpy==1.11.0
+progressbar==2.3
+protobuf==2.6.1
+Theano==0.8.2
