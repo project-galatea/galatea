@@ -88,6 +88,7 @@ class LSTMNet():
 			self._logger.info(self.predict_sentence(seed))
 
 	def predict_sentence(self, input_seq):
+		self._logger.debug("input_seq.shape: " + str(input_seq.shape))
 		preds = self.model.predict(input_seq, verbose=0)[0]
 		self._logger.info(str(preds))
 		sentence = ""
