@@ -12,7 +12,7 @@ from config import *
 
 
 class LSTMNet():
-	def __init__(self, logger, batch_size=64):
+	def __init__(self, logger):
 		self._logger = logger
 		self._logger.info("LSTMNet initialized.")
 
@@ -26,13 +26,12 @@ class LSTMNet():
 
 	def build_model(self):
 		self._logger.info("Building model...")
-		self.model = Seq2seq(
+		self.model = AttentionSeq2seq(
 			batch_input_shape=(TRAIN_BATCH_SIZE, (INPUT_SEQ_LEN+1)*MSG_HISTORY_LEN, 29),
 			hidden_dim=HIDDEN_LAYER_DIM,
 			output_length=MAX_OUTPUT_TOKEN_LENGTH,
-			output_dim=29, # not sure if this is right
-			depth=3,
-			peek=True
+			output_dim=29,
+			depth=3
 		)
 		self._logger.info("Compiling...")
 		self.model.compile(loss='mse', optimizer='rmsprop')
