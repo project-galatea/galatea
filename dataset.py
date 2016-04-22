@@ -62,7 +62,7 @@ class Dataset():
 
 		num_msgs_to_concat = MSG_HISTORY_LEN
 		max_chars_per_msg = INPUT_SEQ_LEN
-		
+
 		num_samples = 0
 		for csv in csvs:
 			num_samples += len(self.load_csv(csv))-num_msgs_to_concat-1
